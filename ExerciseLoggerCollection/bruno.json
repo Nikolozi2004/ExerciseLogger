@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "ExerciseLoggerCollection",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}

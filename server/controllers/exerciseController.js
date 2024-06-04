@@ -1,77 +1,63 @@
-const Exercise = require('../models/exerciseModel')
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
+const Exercise = require('../models/exerciseModel');
 
 // get all Exercises
 const getExercises = async (req, res) => {
-    const Exercises = await Exercise.find({}).sort({ createdAt: -1 })
-
-    res.status(200).json(Exercises)
-}
-
+    const Exercises = await Exercise.find({}).sort({ createdAt: -1 });
+    res.status(200).json(Exercises);
+};
 
 // get a single Exercise
 const getExercise = async (req, res) => {
-    const { id } = req.params
+    const { id } = req.params;
     if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).json({ error: 'No such Exercise' })
+        return res.status(404).json({ error: 'Exercise Not Found' });
     }
-    const Exercise = await Exercise.findById(id)
-    if (!Exercise) {
-        return res.status(404).json({ error: 'No such Exercise' })
+    const exercise = await Exercise.findById(id);
+    if (!exercise) {
+        return res.status(404).json({ error: 'Exercise Not Found' });
     }
-
-    res.status(200).json(Exercise)
-}
-
+    res.status(200).json(exercise);
+};
 
 // create new Exercise
 const createExercise = async (req, res) => {
-    const { title, load, reps } = req.body
+    const { title, load, reps } = req.body;
     try {
-        const Exercise = await Exercise.create({ title, load, reps });
-        res.status(200).json(Exercise)
+        const exercise = await Exercise.create({ title, load, reps });
+        res.status(200).json(exercise);
     } catch (error) {
-        res.status(400).json({ error: error.message })
+        res.status(400).json({ error: error.message });
     }
-}
-
+};
 
 // delete a Exercise
 const deleteExercise = async (req, res) => {
-    const { id } = req.params
+    const { id } = req.params;
     if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).json({ error: 'No such Exercise' })
+        return res.status(404).json({ error: 'Exercise Not Found' });
     }
-
-    const Exercise = await Exercise.findOneAndDelete({ _id: id })
-
-    if (!Exercise) {
-        return res.status(404).json({ error: 'No such Exercise' })
+    const exercise = await Exercise.findOneAndDelete({ _id: id });
+    if (!exercise) {
+        return res.status(404).json({ error: 'Exercise Not Found' });
     }
-
-    res.status(200).json(Exercise)
-}
-
+    res.status(200).json(exercise);
+};
 
 // update a Exercise
 const updateExercise = async (req, res) => {
-    const { id } = req.params
+    const { id } = req.params;
     if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).json({ error: 'No such Exercise' })
+        return res.status(404).json({ error: 'Exercise Not Found' });
     }
-
-    const Exercise = await Exercise.findByIdAndUpdate({ _id: id }, {
+    const exercise = await Exercise.findByIdAndUpdate({ _id: id }, {
         ...req.body
-    })
-
-    if (!Exercise) {
-        return res.status(404).json({ error: 'No such Exercise' })
+    });
+    if (!exercise) {
+        return res.status(404).json({ error: 'Exercise Not Found' });
     }
-
-    res.status(200).json(Exercise)
-
-}
-
+    res.status(200).json(exercise);
+};
 
 module.exports = {
     createExercise,
@@ -79,4 +65,4 @@ module.exports = {
     getExercises,
     deleteExercise,
     updateExercise,
-}
+};
