@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 
 export const NavBar = () => {
     return (
-        <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 py-2 backdrop-blur-sm bg-white/30">
+        <header className="z-50 flex items-center justify-between px-4 py-2 backdrop-blur-sm bg-white/30">
             <Link to="/" className="text-2xl font-bold text-gray-800">
                 <span className="text-blue-500">E</span>xercise<span className="text-blue-500">L</span>ogger
             </Link>

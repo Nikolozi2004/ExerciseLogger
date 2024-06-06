@@ -1,9 +1,9 @@
-import { Fragment, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import axios from "axios";
 import { ExerciseDetails } from "../components/ExerciseDetails";
+import { ExerciseForm } from "../components/ExerciseForm";
 
 export const Home = () => {
-
     const [exercises, setExercises] = useState(null)
     useEffect(() => {
         const fetchExercises = async () => {
@@ -17,12 +17,16 @@ export const Home = () => {
 
         fetchExercises();
     }, []);
+
     return (
-        <div className="mt-20">
-            {exercises && exercises.map((exercise, index) => (
-                <ExerciseDetails key={index} exercise={exercise}/>
-            ))}
+        <div className="flex">
+            <div className="parent grid grid-cols-2 grid-rows-2 gap-2 w-2/3">
+                {exercises && exercises.map((exercise, index) => {
+                    const gridClass = `div${index + 1} col-span-1 row-span-1`;
+                    return <ExerciseDetails key={index} exercise={exercise} className={gridClass} />
+                })}
+            </div>
+            <ExerciseForm />
         </div>
     )
-
 }

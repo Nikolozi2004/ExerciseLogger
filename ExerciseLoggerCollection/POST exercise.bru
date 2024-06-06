@@ -6,6 +6,14 @@ meta {
 
 post {
   url: http://localhost:4000/api/exercises
-  body: none
+  body: json
   auth: none
+}
+
+body:json {
+  {
+    "title" : "Cable Wide Grip Seated Row",
+    "reps" : 20,
+    "load" : 75
+  }
 }
