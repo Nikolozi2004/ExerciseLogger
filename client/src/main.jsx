@@ -7,6 +7,7 @@ import { Login } from './pages/Login.jsx'
 import { Register } from './pages/Register.jsx'
 import { Home } from './pages/Home.jsx'
 import { History } from './components/History.jsx'
+import { ExerciseContextProvider } from './context/ExerciseContext.jsx'
 const router = createBrowserRouter([
   {
     path: "/",
@@ -34,6 +35,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
+    <ExerciseContextProvider>
     <RouterProvider router={router} />
+    </ExerciseContextProvider>
   </React.StrictMode>
 )

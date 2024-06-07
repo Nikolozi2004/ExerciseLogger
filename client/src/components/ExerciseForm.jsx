@@ -1,6 +1,9 @@
 import { useState } from "react";
+import { useExerciseContext } from "../hooks/useExerciseContext";
 import axios from "axios";
+
 export const ExerciseForm = () => {
+    const { dispatch } = useExerciseContext()
     const [title, setTitle] = useState("");
     const [load, setLoad] = useState("");
     const [reps, setReps] = useState("");
@@ -21,6 +24,7 @@ export const ExerciseForm = () => {
             setLoad("");
             setReps("");
             console.log('added', response.data);
+            dispatch({ type: "CREATE_EXERCISE", payload: response.data })
         } catch (err) {
             setError(err.response.data.error);
         }

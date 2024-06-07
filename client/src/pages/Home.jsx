@@ -1,15 +1,17 @@
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import axios from "axios";
 import { ExerciseDetails } from "../components/ExerciseDetails";
 import { ExerciseForm } from "../components/ExerciseForm";
-
+import { useExerciseContext } from "../hooks/useExerciseContext";
 export const Home = () => {
-    const [exercises, setExercises] = useState(null)
+
+    const {exercises, dispatch} = useExerciseContext()
+
     useEffect(() => {
         const fetchExercises = async () => {
             try {
                 const response = await axios.get('http://localhost:4000/api/exercises');
-                setExercises(response.data);
+                dispatch({type: "SET_EXERCISE", payload: response.data});
             } catch (error) {
                 console.error('Error fetching exercises:', error);
             }
