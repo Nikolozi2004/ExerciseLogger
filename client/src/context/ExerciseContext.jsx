@@ -13,6 +13,10 @@ export const exerciseReducer = (state, action) => {
             return {
                 exercises: [action.payload, ...state.exercises]
             }
+        case "DELETE_EXERCISE":
+            return {
+                exercises: state.exercises.filter((e) => e._id !== action.payload._id)
+            }
         default:
             return state
     }
@@ -26,7 +30,7 @@ export const ExerciseContextProvider = ({ children }) => {
 
 
     return (
-        <ExerciseContext.Provider value={{...state, dispatch}}>
+        <ExerciseContext.Provider value={{ ...state, dispatch }}>
             {children}
         </ExerciseContext.Provider>
     )

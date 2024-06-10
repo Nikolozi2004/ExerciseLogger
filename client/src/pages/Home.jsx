@@ -18,11 +18,11 @@ export const Home = () => {
         };
 
         fetchExercises();
-    }, []);
+    }, [dispatch]);
 
     return (
-        <div className="flex">
-            <div className="parent grid grid-cols-2 grid-rows-2 gap-2 w-2/3">
+        <div className="flex justify-between">
+            <div className="parent grid grid-cols-1 grid-rows-2 gap-3 w-2/3 md:grid-cols-2">
                 {exercises && exercises.map((exercise, index) => {
                     const gridClass = `div${index + 1} col-span-1 row-span-1`;
                     return <ExerciseDetails key={index} exercise={exercise} className={gridClass} />
