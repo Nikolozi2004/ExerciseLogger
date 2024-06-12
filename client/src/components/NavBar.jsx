@@ -1,7 +1,14 @@
 import { Link } from "react-router-dom"
+import { useLogout } from "../hooks/useLogout"
 
 
 export const NavBar = () => {
+
+    const { logout } = useLogout()
+
+    const handleClick = () => {
+        logout()
+    }
     return (
         <header className="z-50 flex items-center justify-between px-4 py-2 backdrop-blur-sm bg-white/30">
             <Link to="/" className="text-2xl font-bold text-gray-800">
@@ -20,6 +27,9 @@ export const NavBar = () => {
                 >
                     Sign Up
                 </Link>
+                <button className="px-3 py-2" onClick={handleClick}>
+                    Logout
+                </button>
                 <div className="ml-4 flex items-center bg-gray-200 rounded-full p-1">
                     <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center">
                         <svg

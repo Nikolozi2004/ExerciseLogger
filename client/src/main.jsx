@@ -8,6 +8,8 @@ import { Register } from './pages/Register.jsx'
 import { Home } from './pages/Home.jsx'
 import { History } from './components/History.jsx'
 import { ExerciseContextProvider } from './context/ExerciseContext.jsx'
+import { AuthProvider } from './context/authContext.jsx'
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -35,8 +37,10 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <ExerciseContextProvider>
-      <RouterProvider router={router} />
-    </ExerciseContextProvider>
+    <AuthProvider>
+      <ExerciseContextProvider>
+        <RouterProvider router={router} />
+      </ExerciseContextProvider>
+    </AuthProvider>
   </React.StrictMode>
 )

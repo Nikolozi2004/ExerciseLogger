@@ -38,24 +38,24 @@ export const ExerciseForm = () => {
             <label>Exercise Title:</label>
             <input 
             placeholder="Title"
-            className={emptyFields.includes('title') ? "border-red-600 border" : "w-8/12 pl-2 border-2 rounded border-black"}
+            className={emptyFields.includes('title') ? "border-red-600 w-8/12 pl-2 border-2 rounded" : "w-8/12 pl-2 border-2 rounded border-black"}
             type="text" 
             onChange={(e) => setTitle(e.target.value)} value={title}/>
 
             <label>Exercise Load(kg):</label>
             <input 
-            className={emptyFields.includes('load') ? "border-red-600 border" : "text-center"}
+            className={emptyFields.includes('load') ? "border-red-600 border-2 rounded text-center" : "text-center border-2 rounded border-black"}
             type="number" 
             onChange={(e) => setLoad(e.target.value)} value={load}/>
 
             <label>Exercise Reps:</label>
             <input 
-            className={emptyFields.includes('reps') ? "border-red-600 border" : "text-center"}
+            className={emptyFields.includes('reps') ? "border-red-600 border-2 rounded text-center" : "text-center border-2 rounded border-black"}
             type="number" 
             onChange={(e) => setReps(e.target.value)} 
             value={reps}/>
 
-            <button className="border p-3 flex justify-center items-center">Add Exercise</button>
+            <button className="border p-3 flex justify-center items-center bg-blue-600 text-white rounded-lg">Add Exercise</button>
 
             {error && <p>{error}</p>}
         </form>

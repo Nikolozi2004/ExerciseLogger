@@ -16,8 +16,8 @@ const userSchema = new Schema({
     }
 })
 
-// method
-userSchema.statics.signup = async function(email, password) {
+// method sign
+userSchema.statics.signup = async function (email, password) {
     if (!email || !password) {
         throw Error("fields must be filled")
     }
@@ -29,16 +29,35 @@ userSchema.statics.signup = async function(email, password) {
     }
 
     const exists = await this.findOne({ email });
-    if ( exists) {
+    if (exists) {
         throw Error("Email is already in use")
     }
 
     const salt = await bcrypt.genSalt(10);
     const hash = await bcrypt.hash(password, salt);
 
-    const user = await this.create({email, password: hash});
+    const user = await this.create({ email, password: hash });
 
     return user;
 }
 
+// method login
+userSchema.statics.login = async function (email, password) {
+    if (!email || !password) {
+        throw Error("fields must be filled")
+    }
+
+    const user = await this.findOne({ email });
+    if (!user) {
+        throw Error("Incorrect Email")
+    }
+
+    const match = await bcrypt.compare(password, user.password)
+
+    if (!match) {
+        throw Error("Incorrect Password")
+    }
+
+    return user
+}
 module.exports = mongoose.model("User", userSchema);

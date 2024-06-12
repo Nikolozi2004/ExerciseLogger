@@ -30,3 +30,7 @@ html, body {
   box-sizing: border-box;
   background-color: rgb(142, 80, 80);
 }
+
+.radial-gradient-background {
+  background: radial-gradient(circle at 18.7% 37.8%, rgb(212, 209, 209) 0%, rgb(180, 189, 193) 90%);
+}
