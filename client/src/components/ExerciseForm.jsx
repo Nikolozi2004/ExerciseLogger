@@ -40,32 +40,38 @@ export const ExerciseForm = () => {
     }
 
     return (
-        <form className="w-1/4 flex flex-col justify-evenly items-center bg-white dark:bg-black  border h-96 rounded-md" onSubmit={handleSubmit}>
+        <form className="md:w-1/4 md:ml-0 ml-3 flex flex-col justify-evenly items-center bg-white dark:bg-slate-700 border-slate-800 dark:text-white  border h-96 rounded-md transition-colors duration-500" onSubmit={handleSubmit}>
             <h3 className="text-lg">Add Exercises</h3>
 
             <label>Exercise Title:</label>
             <input
                 placeholder="Title"
-                className={emptyFields.includes('title') ? "border-red-600 w-8/12 pl-2 border-2 rounded" : "w-8/12 pl-2 border-2 rounded border-black"}
+                className={emptyFields.includes('title') ?
+                    "border-red-600 lg:w-10/12 pl-2 border-2 rounded w-full dark:text-black" :
+                    "lg:w-10/12 pl-2 border-2 rounded border-black w-full dark:text-black"}
                 type="text"
                 onChange={(e) => setTitle(e.target.value)} value={title} />
 
             <label>Exercise Load(kg):</label>
             <input
-                className={emptyFields.includes('load') ? "border-red-600 border-2 rounded text-center" : "text-center border-2 rounded border-black"}
+                className={emptyFields.includes('load') ?
+                    "border-red-600 border-2 rounded text-center w-full md:w-1/2 dark:text-black" :
+                    "text-center border-2 rounded border-black w-full md:w-1/2 dark:text-black"}
                 type="number"
                 onChange={(e) => setLoad(e.target.value)} value={load} />
 
             <label>Exercise Reps:</label>
             <input
-                className={emptyFields.includes('reps') ? "border-red-600 border-2 rounded text-center" : "text-center border-2 rounded border-black"}
+                className={emptyFields.includes('reps') ?
+                    "border-red-600 border-2 rounded text-center w-full md:w-1/2 dark:text-black" :
+                    "text-center border-2 rounded border-black w-full md:w-1/2 dark:text-black"}
                 type="number"
                 onChange={(e) => setReps(e.target.value)}
                 value={reps} />
 
-            <button className="border p-3 flex justify-center items-center bg-blue-600 text-white rounded-lg">Add Exercise</button>
+            <button className="border hover:bg-green-500 dark:hover:bg-green-800 dark:border-slate-800 transition-colors duration-500 py-2 px-3 flex justify-center items-center bg-green-600 text-white rounded-lg">Add Exercise</button>
 
-            {error && <p>{error}</p>}
+            {error && <p className="text-red-400 underline-offset-1 underline">{error}</p>}
         </form>
     )
 }

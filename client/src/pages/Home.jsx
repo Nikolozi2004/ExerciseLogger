@@ -27,7 +27,7 @@ export const Home = () => {
 
     return (
         <div className="flex justify-between">
-            <div className="parent grid grid-cols-1 grid-rows-2 gap-3 w-2/3 md:grid-cols-2">
+            <div className="parent grid grid-cols-1 grid-rows-2 gap-3 w-2/3 md:grid-cols-2 overflow-y-auto">
                 {exercises && exercises.map((exercise, index) => {
                     const gridClass = `div${index + 1} col-span-1 row-span-1`;
                     return <ExerciseDetails key={index} exercise={exercise} className={gridClass} />

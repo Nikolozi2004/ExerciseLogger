@@ -8,7 +8,8 @@
   box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
   height: 100%;
   margin: 0;
   padding: 0;
@@ -28,9 +29,54 @@ html, body {
   margin: 0 auto;
   padding: 20px;
   box-sizing: border-box;
-  background-color: rgb(142, 80, 80);
+  min-height: 100vh;
+  overflow: hidden;
 }
 
-.radial-gradient-background {
-  background: radial-gradient(circle at 18.7% 37.8%, rgb(212, 209, 209) 0%, rgb(180, 189, 193) 90%);
+/* Light mode scrollbar styles */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Dark mode scrollbar styles */
+.dark ::-webkit-scrollbar {
+  width: 12px;
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: #2a2a2a;
+  border-radius: 10px;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* For Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #888 #f1f1f1;
+}
+
+.dark * {
+  scrollbar-color: #888 #2a2a2a;
 }

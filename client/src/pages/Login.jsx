@@ -1,12 +1,15 @@
 import { useState } from "react";
-import { EyeIcon, EyeSlashIcon, EnvelopeIcon, ArrowLeftCircleIcon } from "@heroicons/react/24/solid";
+import { EyeIcon, EyeSlashIcon, EnvelopeIcon, ArrowLeftCircleIcon, MoonIcon, SunIcon } from "@heroicons/react/24/solid";
 import { Link } from "react-router-dom";
 import { useLogin } from "../hooks/useLogin";
+import { useDarkMode } from "../context/DarkModeContext"
 export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const { login, isLoading, error } = useLogin()
+  const { login, isLoading, error } = useLogin();
+  const { isDarkMode, toggleDarkMode } = useDarkMode();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     await login(email, password)
@@ -17,20 +20,28 @@ export const Login = () => {
   };
 
   return (
-    <div className="w-full h-screen flex justify-center items-center bg-slate-300 overflow-hidden relative">
-      <Link to="/">
-        <ArrowLeftCircleIcon className="size-10 absolute top-3 left-3 bg-white rounded-full hover:scale-110 hover:bg-black hover:fill-white" />
-      </Link>
+    <div className="w-full h-screen flex justify-center items-center bg-slate-300 dark:bg-slate-900 overflow-hidden relative transition-colors duration-500">
+        <Link to="/">
+          <ArrowLeftCircleIcon className="size-10 absolute top-3 left-3 bg-white rounded-full hover:scale-110 hover:bg-black hover:fill-white" />
+        </Link>
+      <div className="ml-4 flex items-center absolute top-3 left-10 bg-gray-200 rounded-full p-1" onClick={toggleDarkMode}>
+        <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center">
+          {isDarkMode ?
+            <SunIcon className="size-7 hover:scale-110 fill-yellow-500 cursor-pointer text-slate-800 dark:text-slate-200" /> :
+            <MoonIcon className="size-7 cursor-pointer hover:scale-110 fill-slate-500 text-slate-800 dark:text-slate-200" />
+          }
+        </div>
+      </div>
       <form
-        className="flex flex-col justify-between items-center radial-gradient-background p-6 w-96 h-4/6 rounded-md"
+        className="flex flex-col justify-between items-center dark:bg-slate-800 bg-slate-200 p-6 w-96 h-5/6 md:h-4/6 rounded-md transition-colors duration-500"
         onSubmit={handleSubmit}
       >
-        <h1 className="text-lg w-full text-center bg-slate-100 py-2 rounded-xl font-semibold">
+        <h1 className="text-lg w-full text-center bg-slate-100 dark:bg-slate-600 dark:text-slate-50 py-2 rounded-xl font-semibold">
           Login
         </h1>
         <div className="flex flex-col justify-between items-start w-full">
 
-          <label className="font-semibold">Email:</label>
+          <label className="font-semibold dark:text-white">Email:</label>
           <div className="relative w-full my-1 mb-5">
             <input
               className="w-full my-2 p-2 rounded-sm"
@@ -39,10 +50,10 @@ export const Login = () => {
               onChange={(e) => setEmail(e.target.value)}
               value={email}
             />
-            <EnvelopeIcon className="absolute top-1/2 right-2 transform -translate-y-1/2 transition-all size-6" />
+            <EnvelopeIcon className="absolute top-1/2 right-2 transform -translate-y-1/2 transition-all size-6 fill-blue-400" />
           </div>
 
-          <label className="font-semibold">Password:</label>
+          <label className="font-semibold dark:text-white">Password:</label>
           <div className="relative w-full my-1">
             <input
               autoComplete="current-password"
@@ -58,14 +69,15 @@ export const Login = () => {
               onClick={toggleShowPassword}
             >
               {showPassword ? (
-                <EyeIcon className="size-6" />
+                <EyeIcon className="size-6 hover:scale-105 fill-blue-500 hover:fill-red-500" />
               ) : (
-                <EyeSlashIcon className="size-6" />
+                <EyeSlashIcon className="size-6 hover:scale-105 fill-red-500 hover:fill-blue-500" />
               )}
             </button>
           </div>
         </div>
-        {error && <p>{error}</p>}
+        {error && <p className="text-red-100 border py-2 px-4 border-red-700 rounded-sm bg-red-400">{error}</p>}
+        <Link to="/register" className="text-blue-500 hover:text-blue-400">Don't have an account?</Link>
         <button disabled={isLoading} className="bg-blue-400 text-white font-semibold px-5 py-2 rounded-lg hover:bg-blue-200 hover:text-black transition-all">
           Login
         </button>

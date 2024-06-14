@@ -7,7 +7,7 @@ function App() {
   return (
     <Fragment>
       <NavBar />
-      <div className="App">
+      <div className="App bg-slate-300 dark:bg-slate-600 transition-colors duration-500">
         <Outlet />
       </div>
     </Fragment>
