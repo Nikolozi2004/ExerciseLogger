@@ -9,6 +9,7 @@ import { History } from './components/History.jsx'
 import { ExerciseContextProvider } from './context/ExerciseContext.jsx'
 import { AuthProvider } from './context/authContext.jsx'
 import { ProtectedRoute } from './hooks/ProtectedRoute.jsx'
+import { DarkModeProvider } from './context/DarkModeContext.jsx'
 
 const router = createBrowserRouter([
   {
@@ -39,7 +40,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <AuthProvider>
       <ExerciseContextProvider>
-        <RouterProvider router={router} />
+        <DarkModeProvider>
+          <RouterProvider router={router} />
+        </DarkModeProvider>
       </ExerciseContextProvider>
     </AuthProvider>
   </React.StrictMode>
