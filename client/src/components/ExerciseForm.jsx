@@ -4,7 +4,7 @@ import { useAuthContext } from "../hooks/useAuthContext";
 import axios from "axios";
 
 export const ExerciseForm = () => {
-    const {user} = useAuthContext()
+    const { user } = useAuthContext()
     const { dispatch } = useExerciseContext()
     const [title, setTitle] = useState("");
     const [load, setLoad] = useState("");
@@ -44,24 +44,24 @@ export const ExerciseForm = () => {
             <h3 className="text-lg">Add Exercises</h3>
 
             <label>Exercise Title:</label>
-            <input 
-            placeholder="Title"
-            className={emptyFields.includes('title') ? "border-red-600 w-8/12 pl-2 border-2 rounded" : "w-8/12 pl-2 border-2 rounded border-black"}
-            type="text" 
-            onChange={(e) => setTitle(e.target.value)} value={title}/>
+            <input
+                placeholder="Title"
+                className={emptyFields.includes('title') ? "border-red-600 w-8/12 pl-2 border-2 rounded" : "w-8/12 pl-2 border-2 rounded border-black"}
+                type="text"
+                onChange={(e) => setTitle(e.target.value)} value={title} />
 
             <label>Exercise Load(kg):</label>
-            <input 
-            className={emptyFields.includes('load') ? "border-red-600 border-2 rounded text-center" : "text-center border-2 rounded border-black"}
-            type="number" 
-            onChange={(e) => setLoad(e.target.value)} value={load}/>
+            <input
+                className={emptyFields.includes('load') ? "border-red-600 border-2 rounded text-center" : "text-center border-2 rounded border-black"}
+                type="number"
+                onChange={(e) => setLoad(e.target.value)} value={load} />
 
             <label>Exercise Reps:</label>
-            <input 
-            className={emptyFields.includes('reps') ? "border-red-600 border-2 rounded text-center" : "text-center border-2 rounded border-black"}
-            type="number" 
-            onChange={(e) => setReps(e.target.value)} 
-            value={reps}/>
+            <input
+                className={emptyFields.includes('reps') ? "border-red-600 border-2 rounded text-center" : "text-center border-2 rounded border-black"}
+                type="number"
+                onChange={(e) => setReps(e.target.value)}
+                value={reps} />
 
             <button className="border p-3 flex justify-center items-center bg-blue-600 text-white rounded-lg">Add Exercise</button>
 

@@ -1,9 +1,9 @@
-import { AuthContext } from '../context/authContext'
+import { useAuthContext } from './useAuthContext'
 import { Navigate } from 'react-router-dom'
-import { App } from '../App'
+import App from '../App'
 
 
 export const ProtectedRoute = () => {
-    const { user } = AuthContext()
+    const { user } = useAuthContext()
     return user ? <App /> : <Navigate to="/login" />
 }

@@ -6,7 +6,7 @@ export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const {login, isLoading, error} = useLogin()
+  const { login, isLoading, error } = useLogin()
   const handleSubmit = async (e) => {
     e.preventDefault();
     await login(email, password)
@@ -45,7 +45,7 @@ export const Login = () => {
           <label className="font-semibold">Password:</label>
           <div className="relative w-full my-1">
             <input
-              autoComplete="current-password" 
+              autoComplete="current-password"
               className="w-full my-2 p-2 rounded-sm"
               placeholder="Password"
               type={showPassword ? "text" : "password"}

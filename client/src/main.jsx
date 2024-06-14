@@ -8,7 +8,7 @@ import { Home } from './pages/Home.jsx'
 import { History } from './components/History.jsx'
 import { ExerciseContextProvider } from './context/ExerciseContext.jsx'
 import { AuthProvider } from './context/authContext.jsx'
-import ProtectedRoute from './hooks/ProtectedRoute.jsx'
+import { ProtectedRoute } from './hooks/ProtectedRoute.jsx'
 
 const router = createBrowserRouter([
   {
