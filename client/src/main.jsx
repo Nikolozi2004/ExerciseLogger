@@ -1,6 +1,5 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
 import './index.css'
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
 import { Login } from './pages/Login.jsx'
@@ -9,11 +8,12 @@ import { Home } from './pages/Home.jsx'
 import { History } from './components/History.jsx'
 import { ExerciseContextProvider } from './context/ExerciseContext.jsx'
 import { AuthProvider } from './context/authContext.jsx'
+import ProtectedRoute from './hooks/ProtectedRoute.jsx'
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: <ProtectedRoute />,
     children: [
       {
         path: "/",

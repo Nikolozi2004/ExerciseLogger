@@ -3,22 +3,27 @@ import axios from "axios";
 import { ExerciseDetails } from "../components/ExerciseDetails";
 import { ExerciseForm } from "../components/ExerciseForm";
 import { useExerciseContext } from "../hooks/useExerciseContext";
+import { useAuthContext } from "../hooks/useAuthContext";
 export const Home = () => {
 
-    const {exercises, dispatch} = useExerciseContext()
+    const { exercises, dispatch } = useExerciseContext()
+    const { user } = useAuthContext()
 
     useEffect(() => {
         const fetchExercises = async () => {
             try {
-                const response = await axios.get('http://localhost:4000/api/exercises');
-                dispatch({type: "SET_EXERCISE", payload: response.data});
+                const response = await axios.get('http://localhost:4000/api/exercises', {
+                    headers: { "Authorization": `Bearer ${user.token}` }
+                });
+                dispatch({ type: "SET_EXERCISE", payload: response.data });
             } catch (error) {
                 console.error('Error fetching exercises:', error);
             }
         };
-
-        fetchExercises();
-    }, [dispatch]);
+        if (user) {
+            fetchExercises();
+        }
+    }, [dispatch, user]);
 
     return (
         <div className="flex justify-between">

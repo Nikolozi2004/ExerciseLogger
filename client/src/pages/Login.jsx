@@ -1,16 +1,15 @@
 import { useState } from "react";
 import { EyeIcon, EyeSlashIcon, EnvelopeIcon, ArrowLeftCircleIcon } from "@heroicons/react/24/solid";
 import { Link } from "react-router-dom";
+import { useLogin } from "../hooks/useLogin";
 export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-
+  const {login, isLoading, error} = useLogin()
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setEmail("");
-    setPassword("");
-    console.log(email, password);
+    await login(email, password)
   };
 
   const toggleShowPassword = () => {
@@ -66,7 +65,8 @@ export const Login = () => {
             </button>
           </div>
         </div>
-        <button className="bg-blue-400 text-white font-semibold px-5 py-2 rounded-lg hover:bg-blue-200 hover:text-black transition-all">
+        {error && <p>{error}</p>}
+        <button disabled={isLoading} className="bg-blue-400 text-white font-semibold px-5 py-2 rounded-lg hover:bg-blue-200 hover:text-black transition-all">
           Login
         </button>
       </form>

@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { useExerciseContext } from "../hooks/useExerciseContext";
+import { useAuthContext } from "../hooks/useAuthContext";
 import axios from "axios";
 
 export const ExerciseForm = () => {
+    const {user} = useAuthContext()
     const { dispatch } = useExerciseContext()
     const [title, setTitle] = useState("");
     const [load, setLoad] = useState("");
@@ -11,6 +13,10 @@ export const ExerciseForm = () => {
     const [emptyFields, setEmptyFields] = useState([])
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if (!user) {
+            setError('You must be logged in')
+            return
+        }
         const exercise = {
             title,
             load,
@@ -18,7 +24,9 @@ export const ExerciseForm = () => {
         };
 
         try {
-            const response = await axios.post('http://localhost:4000/api/exercises', exercise);
+            const response = await axios.post('http://localhost:4000/api/exercises', exercise, {
+                headers: { "Authorization": `Bearer ${user.token}` }
+            });
             setError(null);
             setTitle("");
             setLoad("");
