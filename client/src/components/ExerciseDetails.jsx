@@ -1,7 +1,7 @@
 import axios from "axios"
 import { useExerciseContext } from "../hooks/useExerciseContext";
 import { useAuthContext } from "../hooks/useAuthContext";
-import { TrashIcon } from "@heroicons/react/24/solid"
+import { TrashIcon, PlusIcon, ArrowRightCircleIcon } from "@heroicons/react/24/solid"
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 /* eslint-disable react/prop-types */
 export const ExerciseDetails = ({ exercise, className }) => {
@@ -12,7 +12,7 @@ export const ExerciseDetails = ({ exercise, className }) => {
     if (!user) {
       return
     }
-    const response = await axios.delete(`http://localhost:4000/api/exercises/${exercise._id}`, {
+    const response = await axios.delete(`https://exerciselogger.onrender.com/api/exercises/${exercise._id}`, {
       headers: { "Authorization": `Bearer ${user.token}` }
     })
     try {
@@ -23,27 +23,22 @@ export const ExerciseDetails = ({ exercise, className }) => {
   }
 
   return (
-    <div className={`${className} transition-all duration-300 bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-700 shadow-md hover:shadow-lg rounded-lg p-5 relative`}>
-      <h4 className="text-xl font-semibold mb-3">{exercise.title}</h4>
+    <div className={`${className} transition-all duration-300 bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-700 shadow-md hover:shadow-lg rounded-lg py-5 px-2 md:p-5 relative`}>
+      <h4 className="text-xl font-semibold mb-3 w-full text-center underline">{exercise.title}</h4>
 
       <div className="space-y-2 mb-4">
         {exercise.load !== 0 && (
           <p className="flex items-center">
             <span className="mr-2">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-blue-500 dark:text-blue-400" viewBox="0 0 20 20" fill="currentColor">
-                <path fillRule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clipRule="evenodd" />
-              </svg>
-            </span>
-            Load: <span className="font-medium">{exercise.load} kg</span>
+              <PlusIcon className="size-5 fill-blue-500"/>
+            </span>Load: <span className="font-medium ml-1">{exercise.load} kg</span>
           </p>
         )}
         <p className="flex items-center">
-          <span className="mr-2">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-green-500 dark:text-green-400" viewBox="0 0 20 20" fill="currentColor">
-              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z" clipRule="evenodd" />
-            </svg>
-          </span>
-          Reps: <span className="font-medium">{exercise.reps}</span>
+        <span className="mr-2">
+              <ArrowRightCircleIcon className="size-5 fill-green-500"/>
+            </span>
+          Reps: <span className="font-medium ml-1">{exercise.reps}</span>
         </p>
       </div>
 

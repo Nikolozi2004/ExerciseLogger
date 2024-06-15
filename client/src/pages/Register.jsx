@@ -76,7 +76,7 @@ export const Register = () => {
         {error && <p className="text-red-100 border py-2 px-4 border-red-700 rounded-sm bg-red-400">{error}</p>}
         <Link to="/login" className="text-blue-500 hover:text-blue-400">Already have account?</Link>
         <button disabled={isLoading} className="bg-blue-400 text-white px-5 py-2 rounded-lg font-semibold hover:bg-blue-200 hover:text-black transition-all">
-          Sign Up
+        {isLoading ? <div className="spinner border-4 border-t-4 border-white border-opacity-25 border-t-white rounded-full w-4 h-4"></div> : <p>Sign Up</p>}
         </button>
       </form>
     </div>

@@ -39,7 +39,7 @@ const createExercise = async (req, res) => {
         emptyFields.push('reps')
     }
     if (emptyFields.length > 0) {
-        return res.status(400).json({ error: "Please fill in all fields", emptyFields })
+        return res.status(400).json({ error: "Every field must be filled", emptyFields })
     }
 
     try {

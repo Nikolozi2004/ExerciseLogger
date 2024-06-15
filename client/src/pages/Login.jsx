@@ -21,9 +21,9 @@ export const Login = () => {
 
   return (
     <div className="w-full h-screen flex justify-center items-center bg-slate-300 dark:bg-slate-900 overflow-hidden relative transition-colors duration-500">
-        <Link to="/">
-          <ArrowLeftCircleIcon className="size-10 absolute top-3 left-3 bg-white rounded-full hover:scale-110 hover:bg-black hover:fill-white" />
-        </Link>
+      <Link to="/">
+        <ArrowLeftCircleIcon className="size-10 absolute top-3 left-3 bg-white rounded-full hover:scale-110 hover:bg-black hover:fill-white" />
+      </Link>
       <div className="ml-4 flex items-center absolute top-3 left-10 bg-slate-500 hover:scale-110 cursor-pointer rounded-full p-1" onClick={toggleDarkMode}>
         <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center">
           {isDarkMode ?
@@ -79,7 +79,7 @@ export const Login = () => {
         {error && <p className="text-red-100 border py-2 px-4 border-red-700 rounded-sm bg-red-400">{error}</p>}
         <Link to="/register" className="text-blue-500 hover:text-blue-400">Don't have an account?</Link>
         <button disabled={isLoading} className="bg-blue-400 text-white font-semibold px-5 py-2 rounded-lg hover:bg-blue-200 hover:text-black transition-all">
-          Login
+          {isLoading ? <div className="spinner border-4 border-t-4 border-white border-opacity-25 border-t-white rounded-full w-4 h-4"></div> : <p>Login</p>}
         </button>
       </form>
     </div>

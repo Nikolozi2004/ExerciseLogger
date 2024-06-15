@@ -13,7 +13,7 @@ export const useRegister = () => {
         setError(null)
 
         try {
-            const response = await axios.post("http://localhost:4000/api/user/signup", {
+            const response = await axios.post("https://exerciselogger.onrender.com/api/user/signup", {
                 email,
                 password
             });

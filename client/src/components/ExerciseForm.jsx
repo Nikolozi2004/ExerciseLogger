@@ -4,20 +4,22 @@ import { useAuthContext } from "../hooks/useAuthContext";
 import axios from "axios";
 
 export const ExerciseForm = () => {
-    const { user } = useAuthContext()
-    const { dispatch } = useExerciseContext()
+    const { user } = useAuthContext();
+    const { dispatch } = useExerciseContext();
     const [title, setTitle] = useState("");
     const [load, setLoad] = useState("");
     const [reps, setReps] = useState("");
     const [error, setError] = useState(null);
-    const [emptyFields, setEmptyFields] = useState([])
+    const [emptyFields, setEmptyFields] = useState([]);
+    const [isPosting, setIsPosting] = useState(false);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (!user) {
-            setError('You must be logged in')
-            return
+            setError('You must be logged in');
+            return;
         }
+        setIsPosting(true);
         const exercise = {
             title,
             load,
@@ -25,36 +27,38 @@ export const ExerciseForm = () => {
         };
 
         try {
-            const response = await axios.post('http://localhost:4000/api/exercises', exercise, {
+            const response = await axios.post('https://exerciselogger.onrender.com/api/exercises', exercise, {
                 headers: { "Authorization": `Bearer ${user.token}` }
             });
             setError(null);
             setTitle("");
             setLoad("");
             setReps("");
-            setEmptyFields([])
-            dispatch({ type: "CREATE_EXERCISE", payload: response.data })
+            setEmptyFields([]);
+            dispatch({ type: "CREATE_EXERCISE", payload: response.data });
         } catch (err) {
             setError(err.response.data.error);
-            setEmptyFields(err.response.data.emptyFields)
+            setEmptyFields(err.response.data.emptyFields);
+        } finally {
+            setIsPosting(false); // End posting
         }
-    }
+    };
 
     const handleTitleChange = (e) => {
         const value = e.target.value.slice(0, 90);
         setTitle(value);
-    }
+    };
 
     const handleNumberChange = (e, setter) => {
         const value = e.target.value;
         if (value === '' || (parseInt(value) >= 0 && parseInt(value) <= 999)) {
             setter(value);
         }
-    }
+    };
 
     return (
         <form
-            className="md:w-1/3 mx-auto h-fit p-6 flex flex-col space-y-4 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 shadow-lg rounded-lg transition-colors duration-500"
+            className="md:w-1/3 mx-auto w-60 h-fit p-6 flex flex-col space-y-4 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 shadow-lg rounded-lg transition-colors duration-500"
             onSubmit={handleSubmit}
         >
             <h3 className="text-2xl font-semibold text-center text-slate-800 dark:text-white mb-4">Add Exercise</h3>
@@ -107,12 +111,21 @@ export const ExerciseForm = () => {
             </div>
 
             <button
-                className="w-full py-2 px-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-md transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                type="submit"
+                className={`w-full py-2 px-4 ${isPosting ? 'bg-gray-500 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700'} text-white font-semibold rounded-md transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2`}
+                disabled={isPosting}
             >
-                Add Exercise
+                {isPosting ? (
+                    <>
+                        <span className="spinner border-4 border-t-4 border-white border-opacity-25 border-t-white rounded-full w-4 h-4 inline-block mr-2"></span>
+                        Posting...
+                    </>
+                ) : (
+                    'Add Exercise'
+                )}
             </button>
 
             {error && <p className="text-red-500 text-sm text-center">{error}</p>}
         </form>
-    )
-}
+    );
+};
