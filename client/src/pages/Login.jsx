@@ -24,11 +24,11 @@ export const Login = () => {
         <Link to="/">
           <ArrowLeftCircleIcon className="size-10 absolute top-3 left-3 bg-white rounded-full hover:scale-110 hover:bg-black hover:fill-white" />
         </Link>
-      <div className="ml-4 flex items-center absolute top-3 left-10 bg-gray-200 rounded-full p-1" onClick={toggleDarkMode}>
+      <div className="ml-4 flex items-center absolute top-3 left-10 bg-slate-500 hover:scale-110 cursor-pointer rounded-full p-1" onClick={toggleDarkMode}>
         <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center">
           {isDarkMode ?
-            <SunIcon className="size-7 hover:scale-110 fill-yellow-500 cursor-pointer text-slate-800 dark:text-slate-200" /> :
-            <MoonIcon className="size-7 cursor-pointer hover:scale-110 fill-slate-500 text-slate-800 dark:text-slate-200" />
+            <SunIcon className="size-7 hover:scale-110 fill-yellow-500 text-slate-800 dark:text-slate-200" /> :
+            <MoonIcon className="size-7 hover:scale-110 fill-slate-500 text-slate-800 dark:text-slate-200" />
           }
         </div>
       </div>

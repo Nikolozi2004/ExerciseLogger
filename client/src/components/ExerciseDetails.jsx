@@ -23,15 +23,40 @@ export const ExerciseDetails = ({ exercise, className }) => {
   }
 
   return (
-    <div className={`${className} transition-colors flex flex-col duration-500 bg-white dark:text-slate-200 dark:bg-slate-700 border-slate-900 border p-3 border-spacing-2 rounded relative`}>
-      <h4 className="underline underline-offset-2 underline">{exercise.title}</h4>
-      {exercise.load === 0 ? null : <p>Load:{exercise.load}</p>}
-      <p>Reps: {exercise.reps}</p>
-      <div className="flex w-full justify-between">
-        <p>{formatDistanceToNow(new Date(exercise.createdAt), { addSuffix: true })}</p>
-        <span className="cursor-pointer absolute bottom-3 right-3" onClick={handleClick}><TrashIcon className="size-6 dark:fill-red-400 fill-blue-500 hover:scale-110" /></span>
+    <div className={`${className} transition-all duration-300 bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-700 shadow-md hover:shadow-lg rounded-lg p-5 relative`}>
+      <h4 className="text-xl font-semibold mb-3">{exercise.title}</h4>
+
+      <div className="space-y-2 mb-4">
+        {exercise.load !== 0 && (
+          <p className="flex items-center">
+            <span className="mr-2">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-blue-500 dark:text-blue-400" viewBox="0 0 20 20" fill="currentColor">
+                <path fillRule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clipRule="evenodd" />
+              </svg>
+            </span>
+            Load: <span className="font-medium">{exercise.load} kg</span>
+          </p>
+        )}
+        <p className="flex items-center">
+          <span className="mr-2">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-green-500 dark:text-green-400" viewBox="0 0 20 20" fill="currentColor">
+              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z" clipRule="evenodd" />
+            </svg>
+          </span>
+          Reps: <span className="font-medium">{exercise.reps}</span>
+        </p>
       </div>
 
+      <div className="flex justify-between absolute bottom-5 left-3 items-center text-sm text-slate-500 dark:text-slate-400">
+        <p>{formatDistanceToNow(new Date(exercise.createdAt), { addSuffix: true })}</p>
+      </div>
+      <button
+          onClick={handleClick}
+          className="p-2 rounded-full absolute right-3 bottom-3 hover:bg-red-100 dark:hover:bg-red-900 transition-colors duration-300"
+          aria-label="Delete exercise"
+        >
+          <TrashIcon className="h-5 w-5 text-red-500 dark:text-red-400" />
+        </button>
     </div>
   )
 }

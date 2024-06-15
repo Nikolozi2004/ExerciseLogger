@@ -10,6 +10,7 @@ import { ExerciseContextProvider } from './context/ExerciseContext.jsx'
 import { AuthProvider } from './context/authContext.jsx'
 import { ProtectedRoute } from './hooks/ProtectedRoute.jsx'
 import { DarkModeProvider } from './context/DarkModeContext.jsx'
+import { NotFound } from './pages/NotFound.jsx'
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,7 @@ const router = createBrowserRouter([
         element: <History />,
       }
     ],
+    errorElement: <NotFound />
   },
   {
     path: "/login",
@@ -34,6 +36,10 @@ const router = createBrowserRouter([
     path: "/register",
     element: <Register />
   },
+  {
+    path: "*", 
+    element: <NotFound />
+  }
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(

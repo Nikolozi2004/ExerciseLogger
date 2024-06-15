@@ -6,10 +6,12 @@ export const AuthContext = createContext()
 export const authReducer = (state, action) => {
     switch (action.type) {
         case "LOGIN":
-            return { user: action.payload }
+            return { user: action.payload, isLoading: false }
         case "LOGOUT":
-            return { user: null }
-        case "default":
+            return { user: null, isLoading: false }
+        case "LOADED":
+            return { ...state, isLoading: false }
+        default:
             return state
     }
 }
@@ -17,7 +19,8 @@ export const authReducer = (state, action) => {
 // eslint-disable-next-line react/prop-types
 export const AuthProvider = ({ children }) => {
     const [state, dispatch] = useReducer(authReducer, {
-        user: null
+        user: null,
+        isLoading: true
     })
 
     useEffect(() => {
@@ -25,6 +28,7 @@ export const AuthProvider = ({ children }) => {
         if (user) {
             dispatch({ type: "LOGIN", payload: user })
         }
+        dispatch({ type: "LOADED" })
     }, [])
 
     console.log('authContext state: ', state)

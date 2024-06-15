@@ -13,7 +13,7 @@ export const NavBar = () => {
     }
 
     return (
-        <header className="z-50 overflow-hidden flex items-center justify-between px-4 py-2 bg-slate-100 backdrop-blur-sm dark:bg-slate-800 transition-colors duration-500">
+        <header className="z-50 overflow-hidden flex items-center justify-between px-8 py-2 bg-slate-100 backdrop-blur-sm dark:bg-slate-900 transition-colors duration-500">
             <Link to="/" className="text-2xl font-bold text-slate-800 dark:text-slate-200">
                 <span className="text-blue-500">E</span><span className="hidden md:inline">xercise</span><span className="text-blue-500">L</span><span className="hidden md:inline">ogger</span>
             </Link>
