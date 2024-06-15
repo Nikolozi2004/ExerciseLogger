@@ -4,12 +4,19 @@ import { useAuthContext } from "../hooks/useAuthContext"
 import { Fragment } from "react"
 import { SunIcon, MoonIcon } from "@heroicons/react/24/solid"
 import { useDarkMode } from "../context/DarkModeContext"
+import { useDeleteUser } from "../hooks/useDeleteUser"
 export const NavBar = () => {
     const { user } = useAuthContext()
     const { logout } = useLogout()
+    const { deleteUser, isLoading, error } = useDeleteUser()
     const { isDarkMode, toggleDarkMode } = useDarkMode();
     const handleClick = () => {
         logout()
+    }
+    const handleDelete = async () => {
+        if (window.confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
+            await deleteUser()
+        }
     }
 
     return (
@@ -32,6 +39,13 @@ export const NavBar = () => {
                         Sign Up
                     </Link>
                 </Fragment>)}
+                <div>
+                    {/* Other profile information */}
+                    <button onClick={handleDelete} disabled={isLoading}>
+                        {isLoading ? 'Deleting...' : 'Delete Account'}
+                    </button>
+                    {error && <div className="error">{error}</div>}
+                </div>
                 {user && (<Fragment>
                     <button className="px-3 py-2 bg-red-300 hover:bg-red-500 transition-all hover:text-white text-slate-100 rounded-lg dark:text-slate-200 mr-2" onClick={handleClick}>
                         Logout
