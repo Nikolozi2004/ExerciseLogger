@@ -67,7 +67,7 @@ export const ExerciseForm = () => {
                 <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">Exercise Title:</label>
                 <input
                     placeholder="Enter exercise title (max 90 characters)"
-                    className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-slate-700 dark:text-white ${emptyFields.includes('title')
+                    className={`w-full px-3 py-2 border rounded-md focus:outline-none transition-colors duration-500 focus:ring-2 focus:ring-blue-500 dark:bg-slate-700 dark:text-white ${emptyFields.includes('title')
                         ? 'border-red-500 focus:ring-red-500'
                         : 'border-slate-300 dark:border-slate-600'
                         }`}
@@ -82,7 +82,7 @@ export const ExerciseForm = () => {
                 <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">Exercise Load (kg):</label>
                 <input
                     placeholder="Enter Load (Max 999)"
-                    className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-slate-700 dark:text-white ${emptyFields.includes('load')
+                    className={`w-full px-3 py-2 transition-colors duration-500 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-slate-700 dark:text-white ${emptyFields.includes('load')
                         ? 'border-red-500 focus:ring-red-500'
                         : 'border-slate-300 dark:border-slate-600'
                         }`}
@@ -98,7 +98,7 @@ export const ExerciseForm = () => {
                 <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">Exercise Reps:</label>
                 <input
                     placeholder="Enter Reps (Max 999)"
-                    className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-slate-700 dark:text-white ${emptyFields.includes('reps')
+                    className={`w-full px-3 py-2 transition-colors duration-500 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-slate-700 dark:text-white ${emptyFields.includes('reps')
                         ? 'border-red-500 focus:ring-red-500'
                         : 'border-slate-300 dark:border-slate-600'
                         }`}
