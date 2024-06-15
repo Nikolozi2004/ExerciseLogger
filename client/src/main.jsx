@@ -11,7 +11,6 @@ import { AuthProvider } from './context/authContext.jsx'
 import { ProtectedRoute } from './hooks/ProtectedRoute.jsx'
 import { DarkModeProvider } from './context/DarkModeContext.jsx'
 import { NotFound } from './pages/NotFound.jsx'
-
 const router = createBrowserRouter([
   {
     path: "/",
@@ -37,7 +36,7 @@ const router = createBrowserRouter([
     element: <Register />
   },
   {
-    path: "*", 
+    path: "*",
     element: <NotFound />
   }
 ])
