@@ -27,7 +27,7 @@ export const ExerciseForm = () => {
         };
 
         try {
-            const response = await axios.post('https://exerciselogger.onrender.com/api/exercises', exercise, {
+            const response = await axios.post('http://localhost:4000/api/exercises', exercise, {
                 headers: { "Authorization": `Bearer ${user.token}` }
             });
             setError(null);

@@ -40,7 +40,9 @@ export const NavBar = () => {
                     </Link>
                 </Fragment>)}
                 <div>
-                    {/* Other profile information */}
+                    {user.username}
+                </div>
+                <div>
                     <button onClick={handleDelete} disabled={isLoading}>
                         {isLoading ? 'Deleting...' : 'Delete Account'}
                     </button>

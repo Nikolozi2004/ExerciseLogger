@@ -8,14 +8,15 @@ export const useRegister = () => {
     const [isLoading, setIsLoading] = useState(null);
     const { dispatch } = useAuthContext()
     const navigate = useNavigate()
-    const register = async (email, password) => {
+    const register = async (email, password, username) => {
         setIsLoading(true)
         setError(null)
 
         try {
-            const response = await axios.post("https://exerciselogger.onrender.com/api/user/signup", {
+            const response = await axios.post("http://localhost:4000/api/user/signup", {
                 email,
-                password
+                password,
+                username
             });
 
             localStorage.setItem('user', JSON.stringify(response.data))

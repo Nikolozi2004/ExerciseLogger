@@ -70,13 +70,19 @@ const updateExercise = async (req, res) => {
     if (!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(404).json({ error: 'Exercise Not Found' });
     }
-    const exercise = await Exercise.findByIdAndUpdate({ _id: id }, {
-        ...req.body
-    });
-    if (!exercise) {
-        return res.status(404).json({ error: 'Exercise Not Found' });
+    try {
+        const exercise = await Exercise.findOneAndUpdate(
+            { _id: id, user_id: req.user._id },
+            { ...req.body },
+            { new: true }
+        );
+        if (!exercise) {
+            return res.status(404).json({ error: 'Exercise Not Found' });
+        }
+        res.status(200).json(exercise);
+    } catch (error) {
+        res.status(400).json({ error: error.message });
     }
-    res.status(200).json(exercise);
 };
 
 module.exports = {

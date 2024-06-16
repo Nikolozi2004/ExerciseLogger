@@ -13,6 +13,12 @@ export const exerciseReducer = (state, action) => {
             return {
                 exercises: [action.payload, ...state.exercises]
             }
+        case "PATCH_EXERCISE":
+            return {
+                exercises: state.exercises.map((exercise) =>
+                    exercise._id === action.payload._id ? action.payload : exercise
+                )
+            }
         case "DELETE_EXERCISE":
             return {
                 exercises: state.exercises.filter((e) => e._id !== action.payload._id)
