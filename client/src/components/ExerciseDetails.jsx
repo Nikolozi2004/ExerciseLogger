@@ -18,7 +18,7 @@ export const ExerciseDetails = ({ exercise, className }) => {
       return
     }
     try {
-      const response = await axios.delete(`http://localhost:4000/api/exercises/${exercise._id}`, {
+      const response = await axios.delete(`https://exerciselogger.onrender.com/api/exercises/${exercise._id}`, {
         headers: { "Authorization": `Bearer ${user.token}` }
       })
       dispatch({ type: "DELETE_EXERCISE", payload: response.data })
@@ -37,7 +37,7 @@ export const ExerciseDetails = ({ exercise, className }) => {
     }
     try {
       const response = await axios.patch(
-        `http://localhost:4000/api/exercises/${exercise._id}`,
+        `https://exerciselogger.onrender.com/api/exercises/${exercise._id}`,
         { title, load, reps },
         { headers: { "Authorization": `Bearer ${user.token}` } }
       )

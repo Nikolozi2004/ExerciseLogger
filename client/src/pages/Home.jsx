@@ -18,7 +18,7 @@ export const Home = () => {
         setLoading(true);
         setShowNotification(true);
         try {
-            const response = await axios.get('http://localhost:4000/api/exercises', {
+            const response = await axios.get('https://exerciselogger.onrender.com/api/exercises', {
                 headers: { "Authorization": `Bearer ${user.token}` }
             });
             dispatch({ type: "SET_EXERCISE", payload: response.data });
