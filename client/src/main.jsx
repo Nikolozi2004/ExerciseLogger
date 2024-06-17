@@ -5,12 +5,13 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom"
 import { Login } from './pages/Login.jsx'
 import { Register } from './pages/Register.jsx'
 import { Home } from './pages/Home.jsx'
-import { History } from './components/History.jsx'
+import { Account } from './pages/Account.jsx'
 import { ExerciseContextProvider } from './context/ExerciseContext.jsx'
 import { AuthProvider } from './context/authContext.jsx'
 import { ProtectedRoute } from './hooks/ProtectedRoute.jsx'
 import { DarkModeProvider } from './context/DarkModeContext.jsx'
 import { NotFound } from './pages/NotFound.jsx'
+import { Unauthorized } from './pages/Unauthorized.jsx'
 const router = createBrowserRouter([
   {
     path: "/",
@@ -20,12 +21,16 @@ const router = createBrowserRouter([
         path: "/",
         element: <Home />,
       },
-      {
-        path: "/history",
-        element: <History />,
-      }
     ],
     errorElement: <NotFound />
+  },
+  {
+    path: "/unauthorized",
+    element: <Unauthorized />
+  },
+  {
+    path: "/account",
+    element: <Account />
   },
   {
     path: "/login",

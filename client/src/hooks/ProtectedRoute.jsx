@@ -5,7 +5,7 @@ import App from '../App'
 
 export const ProtectedRoute = () => {
     const { user, isLoading } = useAuthContext()
-    console.log('User in ProtectedRoute:', user)
+    // console.log('User in ProtectedRoute:', user)
 
     if (isLoading) {
         return (

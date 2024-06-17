@@ -40,12 +40,12 @@ export const ExerciseForm = () => {
             setError(err.response.data.error);
             setEmptyFields(err.response.data.emptyFields);
         } finally {
-            setIsPosting(false); // End posting
+            setIsPosting(false);
         }
     };
 
     const handleTitleChange = (e) => {
-        const value = e.target.value.slice(0, 90);
+        const value = e.target.value.slice(0, 30);
         setTitle(value);
     };
 
@@ -66,7 +66,7 @@ export const ExerciseForm = () => {
             <div className="space-y-2">
                 <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">Exercise Title:</label>
                 <input
-                    placeholder="Enter exercise title (max 90 characters)"
+                    placeholder="Enter exercise title (max 30 characters)"
                     className={`w-full px-3 py-2 border rounded-md focus:outline-none transition-colors duration-500 focus:ring-2 focus:ring-blue-500 dark:bg-slate-700 dark:text-white ${emptyFields.includes('title')
                         ? 'border-red-500 focus:ring-red-500'
                         : 'border-slate-300 dark:border-slate-600'
@@ -74,7 +74,7 @@ export const ExerciseForm = () => {
                     type="text"
                     onChange={handleTitleChange}
                     value={title}
-                    maxLength={90}
+                    maxLength={30}
                 />
             </div>
 

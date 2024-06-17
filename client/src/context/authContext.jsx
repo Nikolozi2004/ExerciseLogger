@@ -10,9 +10,14 @@ export const authReducer = (state, action) => {
         case "LOGOUT":
             return { user: null, isLoading: false }
         case "DELETE_USER":
-            return {user: action.payload, isLoading: false}
+            return { user: action.payload, isLoading: false }
         case "LOADED":
             return { ...state, isLoading: false }
+        case "UPDATE_USER":
+            return {
+                ...state,
+                user: { ...state.user, ...action.payload }
+            };
         default:
             return state
     }
@@ -33,7 +38,7 @@ export const AuthProvider = ({ children }) => {
         dispatch({ type: "LOADED" })
     }, [])
 
-    console.log('authContext state: ', state)
+    // console.log('authContext state: ', state)
 
     return (
         <AuthContext.Provider value={{ ...state, dispatch }}>

@@ -1,58 +1,52 @@
-import { Link } from "react-router-dom"
-import { useLogout } from "../hooks/useLogout"
-import { useAuthContext } from "../hooks/useAuthContext"
-import { Fragment } from "react"
-import { SunIcon, MoonIcon } from "@heroicons/react/24/solid"
-import { useDarkMode } from "../context/DarkModeContext"
-import { useDeleteUser } from "../hooks/useDeleteUser"
+import { Link } from "react-router-dom";
+import { useLogout } from "../hooks/useLogout";
+import { useAuthContext } from "../hooks/useAuthContext";
+import { Fragment, useEffect, useRef } from "react";
+import { SunIcon, MoonIcon, UserCircleIcon, Cog8ToothIcon, UserIcon, ArrowRightEndOnRectangleIcon } from "@heroicons/react/24/solid";
+import { useDarkMode } from "../context/DarkModeContext";
+import { useState } from "react";
+
 export const NavBar = () => {
-    const { user } = useAuthContext()
-    const { logout } = useLogout()
-    const { deleteUser, isLoading, error } = useDeleteUser()
+    const { user } = useAuthContext();
+    const { logout } = useLogout();
     const { isDarkMode, toggleDarkMode } = useDarkMode();
+    const [isDropped, setIsDropped] = useState(false);
+    const [isRotated, setIsRotated] = useState(false);
+    const dropdownRef = useRef(null);
     const handleClick = () => {
-        logout()
-    }
-    const handleDelete = async () => {
-        if (window.confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
-            await deleteUser()
-        }
-    }
+        logout();
+    };
+    const handleAccMenu = () => {
+        setIsDropped(!isDropped);
+        setIsRotated(!isRotated);
+    };
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+                setIsDropped(false);
+                setIsRotated(false);
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, []);
 
     return (
-        <header className="z-50 overflow-hidden flex items-center justify-between px-8 py-2 bg-slate-100 backdrop-blur-sm dark:bg-slate-900 transition-colors duration-500">
+        <header className="z-50 overflow-visible flex items-center justify-between px-8 py-2 bg-slate-100 backdrop-blur-sm dark:bg-slate-900 transition-colors duration-500">
             <Link to="/" className="text-2xl font-bold text-slate-800 dark:text-slate-200">
-                <span className="text-blue-500">E</span><span className="hidden md:inline">xercise</span><span className="text-blue-500">L</span><span className="hidden md:inline">ogger</span>
+                <span className="text-blue-500">E</span><span className="md:inline text-slate-700 dark:text-slate-200">xercise</span><span className="text-blue-500">L</span><span className="scale-90 sm:scale-100 text-slate-700 dark:text-slate-200">ogger</span>
             </Link>
-            <nav className="flex items-center">
-                {!user && (<Fragment>
-                    <Link
-                        to="/login"
-                        className="px-3 py-2 text-slate-800 dark:text-slate-200 hover:bg-gray-200 dark:hover:bg-slate-700 rounded-md transition-colors duration-500"
-                    >
-                        Login
-                    </Link>
-                    <Link
-                        to="/register"
-                        className="px-3 py-2 ml-2 text-white bg-blue-500 hover:bg-blue-600 rounded-md transition-colors duration-500"
-                    >
-                        Sign Up
-                    </Link>
-                </Fragment>)}
-                <div>
-                    {user.username}
-                </div>
-                <div>
-                    <button onClick={handleDelete} disabled={isLoading}>
-                        {isLoading ? 'Deleting...' : 'Delete Account'}
-                    </button>
-                    {error && <div className="error">{error}</div>}
-                </div>
+            <nav className="flex justify-end items-center gap-5">
                 {user && (<Fragment>
-                    <button className="px-3 py-2 bg-red-300 hover:bg-red-500 transition-all hover:text-white text-slate-100 rounded-lg dark:text-slate-200 mr-2" onClick={handleClick}>
-                        Logout
-                    </button>
-                    <span className="text-slate-800 dark:text-slate-200 underline">{user.email}</span>
+                    <div className="flex items-center justify-center gap-2 px-3 py-1 rounded-full bg-blue-500 text-white">
+                        <span className="font-semibold">{user.username}</span>
+                        <UserCircleIcon className="w-6 h-6" />
+
+                    </div>
                 </Fragment>)}
                 <div className="ml-4 flex items-center bg-gray-200 dark:bg-slate-700 rounded-full p-1">
                     <div onClick={toggleDarkMode} className="w-8 h-8 bg-white dark:bg-slate-800 rounded-full flex items-center justify-center">
@@ -62,7 +56,28 @@ export const NavBar = () => {
                         }
                     </div>
                 </div>
+                <div className="relative" ref={dropdownRef}>
+                    <Cog8ToothIcon
+                        onClick={handleAccMenu}
+                        className={`dark:fill-slate-200 size-8 cursor-pointer transition-transform duration-300 ${isRotated ? 'rotate-180' : ''}`}
+                    />
+                    {isDropped ? (
+                        <div className="animate-fadeIn absolute bottom-[-108px] right-[-20px] z-50 bg-white dark:bg-slate-800 rounded-md shadow-md p-2">
+                            <Link to="/account" className="flex items-center gap-2 p-2 hover:bg-blue-200 dark:hover:bg-blue-500 rounded-md">
+                                <UserIcon className="w-5 h-5 text-slate-500" />
+                                <span className="text-slate-800 dark:text-slate-200">Profile</span>
+                            </Link>
+                            <div
+                                className="flex items-center gap-2 p-2 hover:bg-red-200 dark:hover:bg-red-500 rounded-md cursor-pointer"
+                                onClick={handleClick}
+                            >
+                                <ArrowRightEndOnRectangleIcon className="w-5 h-5 text-slate-500" />
+                                <span className="text-slate-800 dark:text-slate-200">Logout</span>
+                            </div>
+                        </div>
+                    ) : null}
+                </div>
             </nav>
         </header>
-    )
-}
+    );
+};

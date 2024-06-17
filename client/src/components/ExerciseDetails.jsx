@@ -2,7 +2,7 @@ import { useState } from "react"
 import axios from "axios"
 import { useExerciseContext } from "../hooks/useExerciseContext";
 import { useAuthContext } from "../hooks/useAuthContext";
-import { TrashIcon, PencilIcon, CheckIcon } from "@heroicons/react/24/solid"
+import { TrashIcon, PencilIcon, CheckIcon, ScaleIcon, ArrowPathIcon } from "@heroicons/react/24/solid"
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 
 export const ExerciseDetails = ({ exercise, className }) => {
@@ -49,7 +49,7 @@ export const ExerciseDetails = ({ exercise, className }) => {
   }
 
   return (
-    <div className={`${className} transition-all duration-300 bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-700 shadow-md hover:shadow-lg rounded-lg py-5 px-2 md:p-5 relative`}>
+    <div className={`${className} transition-all duration-300 bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-700 shadow-md hover:shadow-lg h-52 overflow-hidden rounded-lg py-5 px-2 md:p-5 relative`}>
       {isEditing ? (
         <>
           <input
@@ -57,18 +57,24 @@ export const ExerciseDetails = ({ exercise, className }) => {
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             className="w-full mb-2 p-1 border rounded text-black"
+            min="0"
+            max="999"
           />
           <input
             type="number"
             value={load}
             onChange={(e) => setLoad(e.target.value)}
             className="w-full mb-2 p-1 border rounded text-black"
+            min="0"
+            max="999"
           />
           <input
             type="number"
             value={reps}
             onChange={(e) => setReps(e.target.value)}
             className="w-full mb-2 p-1 border rounded text-black"
+            min="0"
+            max="999"
           />
           <button
             onClick={handleUpdate}
@@ -80,9 +86,15 @@ export const ExerciseDetails = ({ exercise, className }) => {
         </>
       ) : (
         <>
-          <h4 className="text-xl font-semibold mb-3 w-full text-center underline">{exercise.title}</h4>
-          <p className="mb-1">Load: <span className="font-medium">{exercise.load} kg</span></p>
-          <p className="mb-1">Reps: <span className="font-medium">{exercise.reps}</span></p>
+          <h4 className="text-xl font-semibold mb-3 w-full pb-1 text-center break-words">{exercise.title}</h4>
+          <p className="mb-1 flex items-center">
+            <ScaleIcon className="h-5 w-5 mr-2 text-slate-500 dark:text-slate-400" />
+            Load: <span className="font-medium ml-1">{exercise.load} kg</span>
+          </p>
+          <p className="mb-1 flex items-center">
+            <ArrowPathIcon className="h-5 w-5 mr-2 text-slate-500 dark:text-slate-400" />
+            Reps: <span className="font-medium ml-1">{exercise.reps}</span>
+          </p>
           <div className="flex justify-between absolute bottom-5 left-3 items-center text-sm text-slate-500 dark:text-slate-400">
             <p>{formatDistanceToNow(new Date(exercise.createdAt), { addSuffix: true })}</p>
           </div>
@@ -95,7 +107,7 @@ export const ExerciseDetails = ({ exercise, className }) => {
           </button>
           <button
             onClick={handleEdit}
-            className="p-2 rounded-full absolute right-12 bottom-3 hover:bg-blue-100 dark:hover:bg-blue-900 transition-colors duration-300"
+            className="p-2 rounded-full absolute right-3 bottom-10 md:right-12 md:bottom-3 hover:bg-blue-100 dark:hover:bg-blue-900 transition-colors duration-300"
             aria-label="Edit exercise"
           >
             <PencilIcon className="h-5 w-5 text-blue-500 dark:text-blue-400" />
