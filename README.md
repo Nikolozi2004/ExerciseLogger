@@ -32,7 +32,6 @@ ExerciseLogger is a full-stack MERN (MongoDB, Express, React, Node.js) applicati
 - bad-words (profanity filter)
 - validator
 
-```markdown
 ## Installation
 
 1. Clone the repository:
