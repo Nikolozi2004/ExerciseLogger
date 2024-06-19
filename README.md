@@ -38,36 +38,36 @@ ExerciseLogger is a full-stack MERN (MongoDB, Express, React, Node.js) applicati
 
 ```bash
 git clone https://github.com/your-username/ExerciseLogger.git
-
+```
 2. Install dependencies for the server:
 
 ```bash
 cd ExerciseLogger/server
 npm install
-
+```
 3. Install dependencies for the client:
 
 ```bash
 cd ExerciseLogger/server
 npm install
-
+```
 4. Create a .env file in the server directory and add your MongoDB connection string:
 
 ```bash
 MONGO_URI=your_mongodb_connection_string
-
+```
 5. Start the server:
 
 ```bash
 cd ExerciseLogger/server
 npm run dev
-
+```
 6. Start the client in a separate terminal window:
 
 ```bash
 cd ExerciseLogger/client
 npm run dev
-
+```
 7. Open your browser and navigate to http://localhost:5173 to access the application.
 
 ## Usage
