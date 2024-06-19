@@ -16,7 +16,7 @@ export const useDeleteUser = () => {
     setError(null)
 
     try {
-      await axios.delete(`https://exerciselogger.onrender.com/api/user/${user._id}`, {
+      await axios.delete(`http://localhost:4000/api/user/${user._id}`, {
         headers: {
           'Authorization': `Bearer ${user.token}`
         }

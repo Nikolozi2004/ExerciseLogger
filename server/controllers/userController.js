@@ -2,6 +2,7 @@ const User = require('../models/userModel')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 const validator = require('validator')
+const Filter = require('bad-words');
 
 const createToken = (_id) => {
     return jwt.sign({ _id }, process.env.SECRET, { expiresIn: '3d' })
@@ -61,6 +62,10 @@ const updateUser = async (req, res) => {
         }
 
         // Update user information
+        const filter = new Filter();
+        if (filter.isProfane(username)) {
+            throw Error("Username contains inappropriate language.");
+        }
         if (username) user.username = username;
         if (email) {
             // Check if the new email is already in use

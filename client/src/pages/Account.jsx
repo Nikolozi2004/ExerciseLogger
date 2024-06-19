@@ -48,7 +48,7 @@ export const Account = () => {
 
         try {
             const response = await axios.patch(
-                `https://exerciselogger.onrender.com/api/user/${user._id}`,
+                `http://localhost:4000/api/user/${user._id}`,
                 { username, email },
                 { headers: { Authorization: `Bearer ${user.token}` } }
             );
@@ -68,7 +68,7 @@ export const Account = () => {
 
         try {
             await axios.patch(
-                `https://exerciselogger.onrender.com/api/user/${user._id}/password`,
+                `http://localhost:4000/api/user/${user._id}/password`,
                 { currentPassword, newPassword },
                 { headers: { Authorization: `Bearer ${user.token}` } }
             );
